@@ -1,0 +1,27 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    application: jenkins-slave
+  name: jenkins-slave
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'jenkins-slave:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git: 
+      uri: "https://github.com/rajeshm123/jenkins-slave.git"
+      ref: "master"
+   # contextDir: custom_/
+    #sourceSecret:
+    #  name: ""
+   # type: Git
+  strategy:
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+    type: Docker
+  triggers: []
